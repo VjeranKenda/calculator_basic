@@ -3,11 +3,11 @@
 # All this fun about developing calculator in Python started with one stupid sentence.
 # While my yunger son and I waiting for doctor I said that stupid sentence. We were
 # waiting in the room crowded by siriusly injured or ill people. After a while
-# you realise that waiting can take hours. We start talk about what he currently learning in
+# you realise that waiting can take for hours. We start talk about what he currently learning in
 # school. After geografy, and some other things we start talk about programming class.
-# I have start to explain posible beatuty things that can be don by programming. And,
-# enthusisatic, said tha I am also now start to learning python as he. And we start
-# to discus what can be easili made ba it. And, in one moment, I said: You can easy build
+# I have start to explain posible beauty things that can be done by programming. And,
+# enthusisaticly, said that I am also now start to learning python as he. And we start
+# to discus what can be easy made by it. And, in one moment, I said: You can easy build
 # calculator! He said: Real one? Me: Off course!! And it started :-)
 #
 from tkinter import *
