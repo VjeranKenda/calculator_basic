@@ -1,14 +1,10 @@
+#
 # calculator.py
 #
-# All this fun about developing calculator in Python started with one stupid sentence.
-# While my yunger son and I waiting for doctor I said that stupid sentence. We were
-# waiting in the room crowded by siriusly injured or ill people. After a while
-# you realise that waiting can take for hours. We start talk about what he currently learning in
-# school. After geografy, and some other things we start talk about programming class.
-# I have start to explain posible beauty things that can be done by programming. And,
-# enthusisaticly, said that I am also now start to learning python as he. And we start
-# to discus what can be easy made by it. And, in one moment, I said: You can easy build
-# calculator! He said: Real one? Me: Off course!! And it started :-)
+# Vjeran Kenda
+# ------------------------------------------------------------------------------
+# 2015     : initial version
+# 20151029 : upload to Git
 #
 from tkinter import *
 from tkinter import ttk
@@ -115,6 +111,11 @@ class CalculatorController():
             self.display_text.set('0')
         else:
             self.display_text.set(text)
+
+    def clearAll(self):
+            self.buffer.clear()
+            self.number_stack.clear()
+            self.operator_stack.clear()
             
     def calculate(self):
         o = self.operator_stack.get()
@@ -143,20 +144,22 @@ class CalculatorController():
         # finite state machine starts here :-)
         #
         if cb.content_type == BUTTON_CONTENT_TYPE_COMMAND and cb.content == 'CLEAR_ALL':
-            self.buffer.clear()
-            self.number_stack.clear()
-            self.operator_stack.clear()
+            self.clearAll()
                 
-        elif self.state == 'int' and cb.content_type == BUTTON_CONTENT_TYPE_DECIMAL_POINT:
+        elif self.state == 'int' and \
+             cb.content_type == BUTTON_CONTENT_TYPE_DECIMAL_POINT:
             self.buffer.addChar(cb.content)
             
-        elif self.state == 'float' and cb.content_type == BUTTON_CONTENT_TYPE_DECIMAL_POINT:
+        elif self.state == 'float' and \
+             cb.content_type == BUTTON_CONTENT_TYPE_DECIMAL_POINT:
             print('--- only one decimal point allowed ---')
             
-        elif (self.state == 'int' or self.state == 'float') and cb.content_type == BUTTON_CONTENT_TYPE_NUMBER:
+        elif (self.state == 'int' or self.state == 'float') and \
+             cb.content_type == BUTTON_CONTENT_TYPE_NUMBER:
             self.buffer.addChar(cb.content)
             
-        elif (self.state == 'int' or self.state == 'float') and cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR:
+        elif (self.state == 'int' or self.state == 'float') and \
+             cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR:
             self.number_stack.add(self.buffer.value)
             self.calculate()
             self.operator_stack.add('operator', cb.content)
@@ -164,7 +167,8 @@ class CalculatorController():
             #self.buffer.addChar(cb.content)
             self.state = 'operator'
 
-        elif self.state == 'operator' and cb.content_type == BUTTON_CONTENT_TYPE_NUMBER:
+        elif self.state == 'operator' and \
+             cb.content_type == BUTTON_CONTENT_TYPE_NUMBER:
             self.buffer.clear() # shoud be clear or calc -- or cleared allready!!!
             self.buffer.addChar(cb.content)
             self.state = 'number'
@@ -173,8 +177,12 @@ class CalculatorController():
             if self.state == 'number':
                 self.number_stack.add(self.buffer.value)
                 self.calculate()
+                b = self.buffer.value
+                self.clearAll()
+                self.number_stack.add(b)
+                
             elif self.state == 'operator':
-                print('what is here?')
+                print('what is here? fancy functionality of common calc!')
             else:
                 print('--- funny state ---')
                 
