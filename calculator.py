@@ -16,6 +16,11 @@ BUTTON_CONTENT_TYPE_DECIMAL_POINT = 3
 BUTTON_CONTENT_TYPE_PARENTHESIS = 4
 BUTTON_CONTENT_TYPE_DECIMAL_POINT = 5
 
+def string_number_type_is_float(s):
+    if '.' in s:
+        return True
+    return False
+    
 class Stack():
 
     def __init__(self):
@@ -32,14 +37,11 @@ class Stack():
             return None
         return self.stack.pop()
 
-    def print(self):
-        for item in self.stack:
-            print('stack -->', item)
         
 class NumberStack(Stack):
 
     def add(self, str_number):
-        if '.' in str_number:
+        if string_number_type_is_float(str_number):
             number = float(str_number)
         else:
             number = int(str_number)
@@ -138,10 +140,8 @@ class CalculatorController():
             self.buffer.setValue(str(r))
     
     def buttonPressed(self, cb):
-        print(cb.content)
-
         #
-        # finite state machine starts here :-)
+        # finite state machine shuld start here :-)
         #
         if cb.content_type == BUTTON_CONTENT_TYPE_COMMAND and cb.content == 'CLEAR_ALL':
             self.clearAll()
@@ -171,17 +171,23 @@ class CalculatorController():
              cb.content_type == BUTTON_CONTENT_TYPE_NUMBER:
             self.buffer.clear() # shoud be clear or calc -- or cleared allready!!!
             self.buffer.addChar(cb.content)
-            self.state = 'number'
+            self.state = 'int'
 
         elif cb.content_type == BUTTON_CONTENT_TYPE_COMMAND and cb.content == '=':
-            if self.state == 'number':
+            if (self.state == 'int' or self.state == 'float'):
                 self.number_stack.add(self.buffer.value)
                 self.calculate()
                 b = self.buffer.value
                 self.clearAll()
                 self.number_stack.add(b)
+                self.buffer.setValue(b)
+                if string_number_type_is_float(b):
+                    self.state = 'float'
+                else:
+                    self.state = 'int'                
                 
             elif self.state == 'operator':
+                #-- to be implemented
                 print('what is here? fancy functionality of common calc!')
             else:
                 print('--- funny state ---')
@@ -191,8 +197,6 @@ class CalculatorController():
 
         self.setDisplayText(self.buffer.value)
 
-        self.number_stack.print()
-        self.operator_stack.print()
 #
 calculator_keyboard = [
     [
@@ -249,7 +253,8 @@ cb = []
 for i in range(len(calculator_keyboard)):
     for j in range(len(calculator_keyboard[i])):
         one_button=calculator_keyboard[i][j]
-        print(i, j, len(cb)-1,  one_button[0])
+        #--- print for debug only
+        # print(i, j, len(cb)-1,  one_button[0])
         if one_button[0]:
             cb.append(CalculatorButton(
                 calculator_keyboard_frame,
