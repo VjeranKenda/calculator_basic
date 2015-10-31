@@ -118,10 +118,12 @@ class CalculatorController():
             self.buffer.clear()
             self.number_stack.clear()
             self.operator_stack.clear()
-            
+            self.state = 'int'
+        
     def calculate(self):
         o = self.operator_stack.get()
-        print(o)
+        # -- print for debug
+        #print(o)
         if o:
             b = self.number_stack.get()
             a = self.number_stack.get()
@@ -141,7 +143,7 @@ class CalculatorController():
     
     def buttonPressed(self, cb):
         #
-        # finite state machine shuld start here :-)
+        # finite state machine should start here :-)
         #
         if cb.content_type == BUTTON_CONTENT_TYPE_COMMAND and cb.content == 'CLEAR_ALL':
             self.clearAll()
@@ -152,6 +154,7 @@ class CalculatorController():
             
         elif self.state == 'float' and \
              cb.content_type == BUTTON_CONTENT_TYPE_DECIMAL_POINT:
+            # here must go to error state
             print('--- only one decimal point allowed ---')
             
         elif (self.state == 'int' or self.state == 'float') and \
@@ -179,6 +182,7 @@ class CalculatorController():
                 self.calculate()
                 b = self.buffer.value
                 self.clearAll()
+                # set back calculated number
                 self.number_stack.add(b)
                 self.buffer.setValue(b)
                 if string_number_type_is_float(b):
