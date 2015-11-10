@@ -1,6 +1,8 @@
 # calculator_basic
 Basic GUI calculator
 
+![Image of calculator v0.02](https://github.com/VjeranKenda/calculator_basic/blob/master/calculator_basic_1.png)
+
 What is this all about?
 
 This little project is for me :-) I am trying to "Learn old dog some new tricks".
