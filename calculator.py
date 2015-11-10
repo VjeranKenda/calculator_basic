@@ -1,5 +1,5 @@
 #
-# calculator.py
+# calculator.py -- on standby
 #
 # Vjeran Kenda
 # ------------------------------------------------------------------------------
@@ -11,10 +11,11 @@ from tkinter import ttk
 
 BUTTON_CONTENT_TYPE_COMMAND = 0
 BUTTON_CONTENT_TYPE_NUMBER = 1
-BUTTON_CONTENT_TYPE_OPERATOR = 2
-BUTTON_CONTENT_TYPE_DECIMAL_POINT = 3
-BUTTON_CONTENT_TYPE_PARENTHESIS = 4
-BUTTON_CONTENT_TYPE_DECIMAL_POINT = 5
+BUTTON_CONTENT_TYPE_OPERATOR_1 = 2
+BUTTON_CONTENT_TYPE_OPERATOR_2 = 3
+BUTTON_CONTENT_TYPE_DECIMAL_POINT = 4
+BUTTON_CONTENT_TYPE_PARENTHESIS = 5
+BUTTON_CONTENT_TYPE_DECIMAL_POINT = 6
 
 def string_number_type_is_float(s):
     if '.' in s:
@@ -89,11 +90,13 @@ class CalculatorButton():
         self.button = None
 
     def iAmPressed(self):
+        # connection : GUI --> controller
         self.controller.buttonPressed(self)
         
     def makeButton(self):
         self.button = ttk.Button(self.frame,
                                  text=self.display_text,
+                                 # setup of conection : GUI --> controller
                                  command=self.iAmPressed)
     
 class CalculatorController():
@@ -145,6 +148,12 @@ class CalculatorController():
         #
         # finite state machine should start here :-)
         #
+        # state : int : float : operator
+        #--------------------------------
+        # num   : int : float : int
+        # dot   : float: err : float (add 0 on display)
+        # oper  : calc : calc : ?  <--- nacrtaj
+        # 
         if cb.content_type == BUTTON_CONTENT_TYPE_COMMAND and cb.content == 'CLEAR_ALL':
             self.clearAll()
                 
@@ -162,10 +171,11 @@ class CalculatorController():
             self.buffer.addChar(cb.content)
             
         elif (self.state == 'int' or self.state == 'float') and \
-             cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR:
+             (cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR_1 or \
+              cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR_2):
             self.number_stack.add(self.buffer.value)
             self.calculate()
-            self.operator_stack.add('operator', cb.content)
+            self.operator_stack.add(cb.content_type, cb.content)
             #self.buffer.clear()
             #self.buffer.addChar(cb.content)
             self.state = 'operator'
@@ -197,11 +207,12 @@ class CalculatorController():
                 print('--- funny state ---')
                 
         else:
+            # oprator after operator
             print('---- Error state ----')
 
         self.setDisplayText(self.buffer.value)
 
-#
+# --- definition of display ---
 calculator_keyboard = [
     [
         [None],
@@ -212,22 +223,22 @@ calculator_keyboard = [
         ['1', BUTTON_CONTENT_TYPE_NUMBER, '1'],
         ['2', BUTTON_CONTENT_TYPE_NUMBER, '2'],
         ['3', BUTTON_CONTENT_TYPE_NUMBER, '3'],
-        ['/', BUTTON_CONTENT_TYPE_OPERATOR, '/']
+        ['/', BUTTON_CONTENT_TYPE_OPERATOR_2, '/']
     ], [
         ['4', BUTTON_CONTENT_TYPE_NUMBER, '4'],
         ['5', BUTTON_CONTENT_TYPE_NUMBER, '5'],
         ['6', BUTTON_CONTENT_TYPE_NUMBER, '6'],
-        ['*', BUTTON_CONTENT_TYPE_OPERATOR, '*']
+        ['*', BUTTON_CONTENT_TYPE_OPERATOR_2, '*']
     ], [
         ['7', BUTTON_CONTENT_TYPE_NUMBER, '7'],
         ['8', BUTTON_CONTENT_TYPE_NUMBER, '8'],
         ['9', BUTTON_CONTENT_TYPE_NUMBER, '9'],
-        ['-', BUTTON_CONTENT_TYPE_OPERATOR, '-']
+        ['-', BUTTON_CONTENT_TYPE_OPERATOR_1, '-']
     ], [
         [None],
         ['0', BUTTON_CONTENT_TYPE_NUMBER, '0'],
         ['.', BUTTON_CONTENT_TYPE_DECIMAL_POINT, '.'],
-        ['+', BUTTON_CONTENT_TYPE_OPERATOR, '+']
+        ['+', BUTTON_CONTENT_TYPE_OPERATOR_1, '+']
     ], [
         [None],
         [None],
