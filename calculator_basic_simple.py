@@ -6,6 +6,7 @@
 # 2015     : initial version - very simple calculator
 # 20151029 : upload to Git
 # 20151109 : working model
+# 20151110 : capturing keyboard pressed keys (without useful impact on calculator)
 #
 from tkinter import *
 from tkinter import ttk
@@ -17,6 +18,9 @@ BUTTON_CONTENT_TYPE_DECIMAL_POINT = 4
 BUTTON_CONTENT_TYPE_PARENTHESIS = 5
 BUTTON_CONTENT_TYPE_DECIMAL_POINT = 6
 
+def key_pressed(tk_event):
+    print('key pressed', tk_event.char, repr(tk_event.char))
+    
 def string_number_type_is_float(s):
     if '.' in s:
         return True
@@ -273,9 +277,11 @@ calculator_keyboard = [
 
 # --- disply setup ---
 root = Tk()
+root.bind("<Key>", key_pressed)
 
 display_frame = ttk.Frame(root, borderwidth=5, relief="sunken")
 display_frame.grid(row=0, column = 0)
+
 
 display_text = StringVar()
 display_label = ttk.Label(display_frame,
