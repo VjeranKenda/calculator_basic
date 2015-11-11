@@ -220,6 +220,11 @@ class CalculatorController():
 
         elif (self.state == 'int' or self.state == 'float') and \
              cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR:
+
+            if len(self.buffer.value) == 0:
+                # zero on display but nothing in buffer
+                self.buffer.setValue('0')
+                
             #
             # push operator to operator_register
             #
@@ -237,8 +242,12 @@ class CalculatorController():
 
         else:
             # oprator after operator
-            print('---- Error state ----')
+            self.state = 'error'
+            print('---- Error state oprator after operator ----')
 
+        if self.state == 'error':
+            self.buffer.setValue('Error - press C')
+            
         self.setDisplayText(self.buffer.value)
 
 
