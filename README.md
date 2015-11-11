@@ -15,7 +15,7 @@ Basic version goals v0.02:
 - (OK) 20151110 : working version that will not be changed : calculator_basic_simple.py 
 
 Basic version goals v0.03:
-- calculator_basic.py is now working version
+- *calculator_basic.py is now working version*
 - learn Python classes
 - learn how to create "cute" readme.md
 - learn how to use GitHub
