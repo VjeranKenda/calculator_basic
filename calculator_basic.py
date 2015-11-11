@@ -19,7 +19,7 @@ BUTTON_CONTENT_TYPE_PARENTHESIS = 5
 BUTTON_CONTENT_TYPE_DECIMAL_POINT = 6
 
 def key_pressed(tk_event):
-    print('key pressed', tk_event.char, repr(tk_event.char))
+    print('key pressed', repr(tk_event.char))
     
 def string_number_type_is_float(s):
     if '.' in s:
@@ -87,17 +87,10 @@ class CalculatorController():
 
     def append_number_to_number_register(self):
 
-        if self.buffer.value == '':
-            # Nothing to do? Is this lefover of some old design?
-            return
-        
         if string_number_type_is_float(self.buffer.value):
             self.number_register.append(float(self.buffer.value))
         else:
             self.number_register.append(int(self.buffer.value))
-        #
-        # clear buffer here?
-        #
 
     def calculate(self, finish_calculation):
 
@@ -113,6 +106,7 @@ class CalculatorController():
         a = self.number_register.pop()
 
         # operation error exceptions should be here
+        # also use function passing insted of switch-case
         if operator == '+':
             r = a + b
         elif operator == '-':
@@ -188,6 +182,8 @@ class CalculatorController():
             elif self.state == 'operator':
                 #-- to be implemented
                 print('what here should be? fancy functionality of common calc!')
+                # clear all until smarter soluion
+                self.clearAll()
             else:
                 print('--- funny state ---')
                 
