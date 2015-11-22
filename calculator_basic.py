@@ -1,13 +1,12 @@
-#
-# calculator_basic.py
-#
-# Vjeran Kenda
-# ------------------------------------------------------------------------------
-# 2015     : initial version - very simple calculator
-# 20151029 : upload to Git
-# 20151109 : working model
-# 20151110 : capturing keyboard pressed keys (without useful impact on calculator)
-#
+""" Simple GUI calculator.
+
+Vjeran Kenda
+------------------------------------------------------------------------------
+2015     : initial version - very simple calculator
+20151029 : upload to Git
+20151109 : working model
+20151110 : capturing keyboard pressed keys (without useful impact on calculator)
+"""
 from tkinter import *
 from tkinter import ttk
 
@@ -20,12 +19,13 @@ BUTTON_CONTENT_TYPE_DECIMAL_POINT = 6
 
 def key_pressed(tk_event):
     print('key pressed', repr(tk_event.char))
-    
+        
 def string_number_type_is_float(s):
     if '.' in s:
         return True
     return False
-    
+
+
 class Buffer():
 
     def __init__(self):
@@ -50,7 +50,7 @@ class CalculatorButton():
         self.content_type = content_type
         self.content = content
         self.button = None
-
+        
     def iAmPressed(self):
         # connection : GUI --> controller
         self.controller.buttonPressed(self)
@@ -60,18 +60,42 @@ class CalculatorButton():
                                  text=self.display_text,
                                  # setup of conection : GUI --> controller
                                  command=self.iAmPressed)
-    
+        
+
+"""
+20151122 : TODO : binding to frame and its children
+
+Unfortunatly, binding keys have to be done here by bind to root.
+I leave for later investigation how to bind something to frame and its all
+children frames and widgets. Currently, when I bind keys to calculator_keyboard_frame,
+it works until one button is pressed and focus is lost for that frame. It seams
+that buttons do not understand that they are children of that frame.
+Guess I don't understand tkinter enough yet :-)"""
 class CalculatorController():
 
-    def __init__(self, display_text):
+    def __init__(self, display_text, frame):
         self.state = 'int'
         self.display_text = display_text
         self.setDisplayText()
         self.buffer = Buffer()
+        self.frame = frame
+        self.cb = None
 
         self.number_register = []
         self.operator_register = []
+        # This should be implemented on frame.
+        self.frame.master.bind('<Key>', self.keyPressed)
         
+    def connect_cb(self, cb):
+        self.cb = cb
+
+    def keyPressed(self, tk_event):
+        for one_cb in cb:
+            if one_cb.content == tk_event.char:
+                #print('key pressed', repr(tk_event.char))
+                one_cb.iAmPressed()
+                break
+            
     def setDisplayText(self, text=''):
 
         if text == '':
@@ -163,7 +187,7 @@ class CalculatorController():
     def buttonPressed(self, cb):
 
         #
-        # command processing
+        # Command processing.
         #
         if cb.content_type == BUTTON_CONTENT_TYPE_COMMAND and cb.content == 'CLEAR_ALL':
             self.clearAll()
@@ -173,7 +197,7 @@ class CalculatorController():
 
                 self.calculate_loop(True)
 
-                # set back calculated number state
+                """ Set back calculated number state. """
                 if string_number_type_is_float(self.buffer.value):
                     self.state = 'float'
                 else:
@@ -182,12 +206,14 @@ class CalculatorController():
             elif self.state == 'operator':
                 #-- to be implemented
                 print('what here should be? fancy functionality of common calc!')
-                # clear all until smarter soluion
+                """ Clear all until smarter soluion. """
                 self.clearAll()
             else:
                 print('--- funny state ---')
                 
-        # number processing        
+         #
+         # Number processing.
+         #
         elif (self.state == 'int' or self.state == 'float') and \
              cb.content_type == BUTTON_CONTENT_TYPE_NUMBER:
             self.buffer.addChar(cb.content)
@@ -202,7 +228,9 @@ class CalculatorController():
             self.state = 'error'
             print('--- only one decimal point allowed ---')
 
-        # operator processing
+        #
+        # Operator processing.
+        #
         elif self.state == 'operator' and \
              cb.content_type == BUTTON_CONTENT_TYPE_OPERATOR:
             self.state = 'error'
@@ -225,9 +253,7 @@ class CalculatorController():
                 # zero on display but nothing in buffer
                 self.buffer.setValue('0')
                 
-            #
-            # push operator to operator_register
-            #
+            """ Push operator to operator_register. """
             if cb.content in ('+', '-'):
                 self.operator_register.append([1, cb.content])
             else:
@@ -280,13 +306,11 @@ calculator_keyboard = [
         ['+', BUTTON_CONTENT_TYPE_OPERATOR, '+']
     ]]
 
-# --- disply setup ---
+# --- display setup ---
 root = Tk()
-root.bind("<Key>", key_pressed)
 
 display_frame = ttk.Frame(root, borderwidth=5, relief="sunken")
 display_frame.grid(row=0, column = 0)
-
 
 display_text = StringVar()
 display_label = ttk.Label(display_frame,
@@ -297,8 +321,7 @@ display_label.grid(row=0, column=0)
 calculator_keyboard_frame = ttk.Frame(root)
 calculator_keyboard_frame.grid(row=1, column = 0)
 
-# --- 
-cc = CalculatorController(display_text)
+cc = CalculatorController(display_text, calculator_keyboard_frame)
 
 cb = []
 for i in range(len(calculator_keyboard)):
@@ -313,6 +336,8 @@ for i in range(len(calculator_keyboard)):
                 one_button[2]))
             cb[len(cb)-1].makeButton()
             cb[len(cb)-1].button.grid(row=i, column=j)
-    
+
+cc.connect_cb(cb)
+
 root.mainloop()
 
