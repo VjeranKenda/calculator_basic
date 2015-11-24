@@ -17,5 +17,5 @@ Current version goals v0.03:
 - learn how to create "cute" readme.md
 - learn how to use GitHub
 
-Read history in history
+Read history in [history](#history)
 
