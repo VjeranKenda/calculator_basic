@@ -22,7 +22,7 @@ Use Python 3.4 or above.
 
 # What is this all about? FTW
 
-This little project is for me :-) [Story](#Story) and [resources](#Resources) are below.
+This little project is for me :-) [Story](#story) and [resources](#resources) are below.
 
 Feel free to copy, fork, distribute... whatever ... but don't blame me if you get bad mark at school. 
 Neither if your Sirius rover fail to land on proper [planet](https://en.wikipedia.org/wiki/Sirius) because of calculation made by this calculator.
