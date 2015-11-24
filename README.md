@@ -12,6 +12,8 @@ Neither if your Sirius rover fail to land on proper [planet](https://en.wikipedi
 
 *Software should be free.* Why and how? Read GNU [philosophy](http://www.gnu.org/philosophy/free-sw.html)
 
+Here you do not have to be afraid of propetary software. If you find some piece of it warn me and it will be removed.
+
 Mail me at <vjeran.kenda@gmail.com> if you have some ideas how to improve or what happend when you try to run it. 
 
 # Story
@@ -45,5 +47,9 @@ Resources used:
     - start here: http://effbot.org/tkinterbook/
     - skip here to understand step by step: http://sebsauvage.net/python/gui/
     - lot of info: http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html
+    
+- work done on:
+    - Python IDLE(https://www.python.org/downloads/)
+    - notepad++ (https://notepad-plus-plus.org/)
 
 There are some development [history](history)
