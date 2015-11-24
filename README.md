@@ -12,7 +12,7 @@ Neither if your Sirius rover fail to land on proper [planet](https://en.wikipedi
 
 *Software should be free.* Why and how? Read GNU [philosophy](http://www.gnu.org/philosophy/free-sw.html)
 
-Mail me <vjeran.kenda@gmail.com> if you have some ideas how to improve or what happend when you try to run it. 
+Mail me at <vjeran.kenda@gmail.com> if you have some ideas how to improve or what happend when you try to run it. 
 
 # Story
 All this funny idea about developing GUI calculator in Python started with one stupid sentence. 
@@ -38,12 +38,12 @@ Use Python 3.4 or above.
 # Resources
 Resources used:
 - Python
-    BIG BOOK : Learning Python, Fourth Edition by Mark Lutz
+    - BIG BOOK : Learning Python, Fourth Edition by Mark Lutz
     free download for personal use at www.it-ebooks.info --> there are lot of IT books
 
 - tkinter :
-    start here: http://effbot.org/tkinterbook/
-    skip here to understand step by step: http://sebsauvage.net/python/gui/
-    lot of info: http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html
+    - start here: http://effbot.org/tkinterbook/
+    - skip here to understand step by step: http://sebsauvage.net/python/gui/
+    - lot of info: http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html
 
-There are some development history in [history](history)
+There are some development [history](history)
