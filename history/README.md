@@ -1,19 +1,17 @@
-# history
+# history of development
 History of Basic GUI calculator
 
-![Image of calculator v0.02](https://github.com/VjeranKenda/calculator_basic/blob/master/calculator_basic_1.png)
+No deadline :-)
 
 How development go ...
 
-Next version goals:
+Goals or TODO list:
 - finite state machine class
 - operator prioryty calculation
 - "trakica" --> side bar with all calculatons and results
 
-Main version:
-- some sci calc with lots of functions
+- some sci calc with lots of functions -->long way to this
 
-No deadline :-)
 
 -----------------------------------
 
