@@ -1,11 +1,28 @@
-# GUI calculator or Learn Old Dog New Tricks
-Basic GUI calculator
+# GUI calculator 
+# ... or ...
+# Can You Teach an Old Dog New Tricks
+
+Basic GUI calculator build in Python with tkinker GUI
 
 ![Image of calculator v0.02](https://github.com/VjeranKenda/calculator_basic/blob/master/calculator_basic_1.png)
 
-What is this all about?
+# Description
 
-This little project is for me :-) Story is below and description is more below.
+*F*unny *T*hing *W*orks:
+- *calculator_basic.py is current working version*
+- input is from buttons and keboard
+- operator precedence working
+- equal sign do not behave as on real calculator
+- division by zero will stop with error
+- operator after operator will stop with error
+- tkinter : use grid geomerty for the start if you don't want to spend huge amount of time to packing
+
+Use Python 3.4 or above. 
+
+
+# What is this all about? FTW
+
+This little project is for me :-) Story and resources are below.
 
 Feel free to copy, fork, distribute... whatever ... but don't blame me if you get bad mark at school. 
 Neither if your Sirius rover fail to land on proper [planet](https://en.wikipedia.org/wiki/Sirius) because of calculation made by this calculator.
@@ -25,17 +42,6 @@ And, enthusiastically, said that I am also begin to learning python as he. And w
 And, in one moment, I said: You can easy build calculator! He said: Real one? Me: Off course!!
 
 And, here I am. Discovering Python, GUI programing with tkinter, finite state machine...
-
-# Description
-Use Python 3.4 or above. 
-
-*F*unny *T*hing *W*orks:
-- *calculator_basic.py is current working version*
-- input is from buttons and keboard
-- operator precedence working
-- equal sign do not behave as on real calculator
-- division by zero will stop with error
-- tkinter : use grid geomerty for the start if you don't want to spend huge amount of time to packing
 
 # Resources
 Resources used:

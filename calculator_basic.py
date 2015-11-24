@@ -139,7 +139,11 @@ class CalculatorController():
             r = a * b
         elif operator == '/':
             # here shold be error checking for division by 0
-            r = a / b
+            if b == 0:
+                print('Division by 0!')
+                r = None
+            else:
+                r = a / b
         else:
             # maybe here inform that something is wrong ?
             r = None
@@ -198,7 +202,9 @@ class CalculatorController():
                 self.calculate_loop(True)
 
                 """ Set back calculated number state. """
-                if string_number_type_is_float(self.buffer.value):
+                if self.buffer.value == 'None':
+                    self.state = 'error'
+                elif string_number_type_is_float(self.buffer.value):
                     self.state = 'float'
                 else:
                     self.state = 'int'
@@ -264,12 +270,15 @@ class CalculatorController():
             #
             self.calculate_loop()
 
-            self.state = 'operator'
+            if self.buffer.value == 'None':
+                self.state = 'error'
+            else:
+                self.state = 'operator'
 
         else:
             # oprator after operator
             self.state = 'error'
-            print('---- Error state oprator after operator ----')
+            print('---- Error state ----')
 
         if self.state == 'error':
             self.buffer.setValue('Error - press C')
