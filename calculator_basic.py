@@ -1,12 +1,11 @@
 """ Simple GUI calculator.
 
-Vjeran Kenda
-------------------------------------------------------------------------------
-2015     : initial version - very simple calculator
-20151029 : upload to Git
-20151109 : working model
-20151110 : capturing keyboard pressed keys (without useful impact on calculator)
-"""
+GUI calculator build with Python 3.4 and standard tkinter package.
+No additional packages or installation needed.
+Run with command: python calculator_basic.py
+
+Have fun :-) Vjeran Kenda """
+
 from tkinter import *
 from tkinter import ttk
 

@@ -2,22 +2,25 @@
 # ... or ...
 # Can You Teach an Old Dog New Tricks
 
-Basic GUI calculator build in Python with tkinker GUI
+Basic GUI calculator build with Python 3.4 with tkinker GUI.
+No additional packages or installation needed.
+Run with command: python calculator_basic.py
 
 ![Image of calculator v0.02](https://github.com/VjeranKenda/calculator_basic/blob/master/calculator_basic_1.png)
 
 # Description
 
 *F*unny *T*hing *W*orks (sort capital descending):
-- *calculator_basic.py is current working version*
+- *(calculator_basic.py) is current working version*
 - input is from buttons and keyboard
 - operator precedence working
 - equal sign do not behave as on real calculator
 - division by zero will stop with error
 - operator after operator will stop with error
-- tkinter : use grid geomerty for the start if you don't want to spend huge amount of time to packing
 
 Use Python 3.4 or above. 
+
+- tkinter : use grid geomerty for the start if you don't want to spend huge amount of time to packing
 
 
 # What is this all about? FTW
@@ -53,10 +56,13 @@ Resources used:
 - tkinter :
     - start here: http://effbot.org/tkinterbook/
     - skip here to understand step by step: http://sebsauvage.net/python/gui/
+    - lot of links : https://wiki.python.org/moin/TkInter
     - lot of info: http://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html
     
 - work done on:
-    - Python IDLE https://www.python.org/downloads/
-    - notepad++ https://notepad-plus-plus.org/
+    - programming : Python IDLE https://www.python.org/downloads/
+    - markdown : notepad++ https://notepad-plus-plus.org/
 
 There are some development [history](history)
+
+PS I don't like design of this page, yet. 

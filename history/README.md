@@ -1,25 +1,28 @@
 # history of development
 History of Basic GUI calculator
 
-No deadline :-)
-
-How development go ...
 
 Goals or TODO list:
 - finite state machine class
 - operator prioryty calculation
 - "trakica" --> side bar with all calculatons and results
-
-- some sci calc with lots of functions -->long way to this
-
-
------------------------------------
-
-Basic version goals v0.03:
-- *calculator_basic.py is now working version*
 - learn Python classes
 - learn how to create "cute" readme.md
 - learn how to use GitHub
+
+- some sci calc with lots of functions -->long way to this
+
+No deadline :-)
+
+
+How development go ...
+-----------------------------------
+20151124 : keyboard is working
+20151110 : capturing keyboard pressed keys (without useful impact on calculator)
+20151109 : working model
+
+Basic version goals v0.03:
+- *calculator_basic.py is now working version*
 
 Basic version goals v0.02:
 - (OK) open GUI with basic numbers and operators
